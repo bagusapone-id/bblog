@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BBlog - Portal Berita</title>
+    <meta name="description" content="Portal berita dan blog terkini">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="nav-brand">
+            <h1>BBlog</h1>
+        </div>
+        <nav class="nav-menu nav-desktop">
+            <a href="index.html">Beranda</a>
+            <a href="#latest-articles">Artikel Terbaru</a>
+        </nav>
+        <div class="nav-menu nav-mobile">
+            <button class="search-toggle" onclick="toggleSearch()" aria-label="Cari">
+                <svg class="icon icon-24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.5-4.5M11 18a7 7 0 100-14 7 7 0 000 14z"/></svg>
+            </button>
+            <button class="menu-toggle" onclick="toggleMobileMenu()" aria-label="Menu">
+                <svg class="icon icon-24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5"/></svg>
+            </button>
+        </div>
+    </header>
+    <nav id="mobileMenu" class="mobile-menu">
+        <a href="index.html">Beranda</a>
+        <a href="#latest-articles">Artikel Terbaru</a>
+        <a href="#" class="submenu-toggle" onclick="toggleMobileSubmenu(event)">Kategori</a>
+        <div id="mobileCategoriesSubmenu" class="submenu"></div>
+    </nav>
+    <div id="mobileOverlay" class="mobile-overlay" onclick="toggleMobileMenu(false)"></div>
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal" onclick="closeModalSearch(event)">
+        <div class="search-modal-content">
+            <div class="search-modal-header">
+                <h3>Pencarian Artikel</h3>
+                <button class="search-close" onclick="closeModalSearch()">
+                    <svg class="icon icon-24" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="search-form">
+                <div class="search-input-group">
+                    <input type="text" id="searchInput" placeholder="Masukkan kata kunci...">
+                    <button class="search-btn" onclick="performSearch()">
+                        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-4.5-4.5M11 18a7 7 0 100-14 7 7 0 000 14z"/></svg> Cari
+                    </button>
+                </div>
+                <div class="search-filters">
+                    <select id="searchCategory">
+                        <option value="all">Semua Kategori</option>
+                    </select>
+                    <select id="searchSort">
+                        <option value="newest">Terbaru</option>
+                        <option value="oldest">Terlama</option>
+                        <option value="popular">Terpopuler</option>
+                    </select>
+                </div>
+            </div>
+            <div class="search-results" id="searchResults"></div>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="content-grid">
+            <section class="articles-section">
+
+
+                <div id="articlesContainer" class="articles-grid">
+                    <div class="loading">Memuat artikel...</div>
+                </div>
+
+                <div class="pagination" id="pagination"></div>
+            </section>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3>Kategori Populer</h3>
+                    <div id="popularCategories"></div>
+                </div>
+                <div class="widget" id="latest-articles">
+                    <h3>Artikel Terbaru</h3>
+                    <div id="recentArticles"></div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 BBlog. All rights reserved.</p>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-storage-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/blog.js"></script>
+</body>
+</html>

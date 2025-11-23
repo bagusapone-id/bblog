@@ -1,0 +1,37 @@
+{
+  "name": "bblog",
+  "version": "1.0.0",
+  "description": "Website blog modern dengan Firebase Realtime Database",
+  "main": "index.html",
+  "scripts": {
+    "start": "firebase serve",
+    "build": "echo 'No build process needed for static site'",
+    "deploy": "firebase deploy",
+    "serve": "firebase serve --only hosting",
+    "test": "echo 'No tests specified'"
+  },
+  "keywords": [
+    "blog",
+    "firebase",
+    "realtime-database",
+    "javascript",
+    "html",
+    "css",
+    "responsive",
+    "seo"
+  ],
+  "author": "BBlog Team",
+  "license": "MIT",
+  "devDependencies": {
+    "firebase-tools": "^12.0.0",
+    "http-server": "^14.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/bblog.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/bblog/issues"
+  },
+  "homepage": "https://yourusername.github.io/bblog"
+}

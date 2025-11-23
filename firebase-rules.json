@@ -1,0 +1,128 @@
+{
+  "rules": {
+    "articles": {
+      ".read": true,
+      ".write": "auth != null",
+      "$articleId": {
+        ".validate": "newData.hasChildren(['id', 'title', 'content', 'category', 'createdAt', 'published'])",
+        "id": {
+          ".validate": "newData.isString() && newData.val() == $articleId"
+        },
+        "title": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200"
+        },
+        "slug": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "content": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "excerpt": {
+          ".validate": "newData.isString()"
+        },
+        "thumbnail": {
+          ".validate": "newData.isString()"
+        },
+        "category": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "tags": {
+          ".validate": "newData.hasChildren()",
+          "$index": {
+            ".validate": "newData.isString()"
+          }
+        },
+        "author": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "published": {
+          ".validate": "newData.isBoolean()"
+        },
+        "views": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "categories": {
+      ".read": true,
+      ".write": "auth != null",
+      "$categoryId": {
+        ".validate": "newData.hasChildren(['name', 'count'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+        },
+        "count": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "comments": {
+      ".read": true,
+      ".write": true,
+      "$commentId": {
+        ".validate": "newData.hasChildren(['id', 'articleId', 'author', 'email', 'content', 'createdAt'])",
+        "id": {
+          ".validate": "newData.isString() && newData.val() == $commentId"
+        },
+        "articleId": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "author": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 50"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/)"
+        },
+        "content": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 1000"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "approved": {
+          ".validate": "newData.isBoolean()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "users": {
+      ".read": "auth != null",
+      ".write": "auth != null",
+      "$userId": {
+        ".validate": "newData.hasChildren(['id', 'email', 'role'])",
+        "id": {
+          ".validate": "newData.isString() && newData.val() == $userId"
+        },
+        "email": {
+          ".validate": "newData.isString() && newData.val().matches(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/)"
+        },
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0"
+        },
+        "role": {
+          ".validate": "newData.isString() && (newData.val() == 'admin' || newData.val() == 'editor')"
+        },
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    }
+  }
+}
